@@ -1,0 +1,159 @@
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  background-color: #000000;
+  color: #ffffff;
+  font-family: "JetBrains Mono", monospace;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@layer utilities {
+  .grid-bg {
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    background-position: -1px -1px;
+  }
+
+  .glass-panel {
+    background: rgba(8, 8, 8, 0.9);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .glass-panel-light {
+    background: rgba(10, 10, 10, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .terminal-line {
+    font-family: "JetBrains Mono", monospace;
+    letter-spacing: 0.02em;
+  }
+
+  .text-glow-green {
+    text-shadow: 0 0 10px rgba(0, 255, 65, 0.3), 0 0 20px rgba(0, 255, 65, 0.1);
+  }
+
+  .glow-border {
+    box-shadow: 0 0 15px rgba(0, 255, 65, 0.05), inset 0 0 15px rgba(0, 255, 65, 0.02);
+  }
+}
+
+.premium-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.premium-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.premium-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 2px;
+}
+
+.premium-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+button, a {
+  transition: all 0.2s ease;
+}
+
+::selection {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+}
+
+/* 3D Cube */
+.cube-scene {
+  perspective: 600px;
+  width: 60px;
+  height: 60px;
+}
+
+.cube {
+  width: 60px;
+  height: 60px;
+  position: relative;
+  transform-style: preserve-3d;
+  animation: rotate-cube 12s infinite ease-in-out;
+}
+
+.cube.glitch {
+  animation: rotate-cube 12s infinite ease-in-out, glitch-cube 0.15s ease-in-out;
+}
+
+.cube-face {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-family: "JetBrains Mono", monospace;
+  color: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.015);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  backface-visibility: hidden;
+}
+
+.cube-face.front  { transform: rotateY(0deg) translateZ(30px); }
+.cube-face.back   { transform: rotateY(180deg) translateZ(30px); }
+.cube-face.right  { transform: rotateY(90deg) translateZ(30px); }
+.cube-face.left   { transform: rotateY(-90deg) translateZ(30px); }
+.cube-face.top    { transform: rotateX(90deg) translateZ(30px); }
+.cube-face.bottom { transform: rotateX(-90deg) translateZ(30px); }
+
+@keyframes rotate-cube {
+  0%, 10% { transform: rotateX(-15deg) rotateY(0deg); }
+  20%, 30% { transform: rotateX(-15deg) rotateY(90deg); }
+  40%, 50% { transform: rotateX(-15deg) rotateY(180deg); }
+  60%, 70% { transform: rotateX(-15deg) rotateY(270deg); }
+  80%, 90% { transform: rotateX(15deg) rotateY(360deg); }
+  100% { transform: rotateX(-15deg) rotateY(0deg); }
+}
+
+@keyframes glitch-cube {
+  0% { transform: translate(1px, -1px) skewX(-1deg); }
+  25% { transform: translate(-1px, 1px) skewX(1deg); }
+  50% { transform: translate(1px, 1px) skewX(0deg); }
+  75% { transform: translate(-1px, -1px) skewX(1deg); }
+  100% { transform: translate(0, 0) skewX(0deg); }
+}
+
+@media (min-width: 640px) {
+  .cube-scene { width: 80px; height: 80px; }
+  .cube { width: 80px; height: 80px; }
+  .cube-face { width: 80px; height: 80px; font-size: 28px; }
+  .cube-face.front  { transform: rotateY(0deg) translateZ(40px); }
+  .cube-face.back   { transform: rotateY(180deg) translateZ(40px); }
+  .cube-face.right  { transform: rotateY(90deg) translateZ(40px); }
+  .cube-face.left   { transform: rotateY(-90deg) translateZ(40px); }
+  .cube-face.top    { transform: rotateX(90deg) translateZ(40px); }
+  .cube-face.bottom { transform: rotateX(-90deg) translateZ(40px); }
+}
