@@ -1,0 +1,70 @@
+# Prabhdeep Singh — Full-Stack Developer & Systems Builder
+
+> Linux enthusiast building privacy-first backend systems, security tooling, and cloud-native applications. Currently pursuing BTech CSE at Bennett University (2024–2028).
+
+## About
+
+Full-stack developer focused on backend systems, security tools, and cloud-native applications. Building scalable microservices, shipping Linux & security tooling, and optimizing throughput @ 100ms.
+
+**Title:** Full-Stack Developer & Systems Builder | Linux Builder | Security Systems  
+**Location:** India  
+**Username/Alias:** root / prabhdeep  
+**Availability:** Open for opportunities. Responds within 24–48 hours. Prefers async communication.
+
+## Work Experience
+
+### IT Intern — Orient Electric
+- Currently working on IT infrastructure, systems management, and internal tooling
+
+### SDE Intern — Lemma
+- Building a secure AI-powered quiz platform with anti-cheating mechanisms
+
+### Deputy Minister — Digital Infrastructure, Bennett University Student Cabinet
+- Building internal tools and mentoring teams on infrastructure and development practices
+
+### Tech Co-Head — CLTI BU (Bennett University)
+- Leading technical operations, organizing workshops, and mentoring students
+
+## Education
+
+**BTech in Computer Science Engineering** — Bennett University, Uttar Pradesh (2024–2028)
+
+## Technical Skills
+
+| Category | Skills |
+|----------|--------|
+| Languages | Python, JavaScript, Java, C/C++, TypeScript, Rust |
+| Backend | Flask, FastAPI, Django, API Development, TCP/IP |
+| Frontend | Next.js, React |
+| Tools & Platforms | Linux (Arch, Ubuntu), Git, Docker, Docker Compose, Kubernetes |
+| Cloud | AWS, GCP, DigitalOcean, Vercel |
+| Agentic AI Tools | Claude-code, Stitch, n8n, Langflow, Ollama |
+
+## Projects
+
+### RetroWraith
+Minimal Linux recovery environment — bootable Arch-based recovery ISO with terminal-only ncurses workflow and offline disk inspection. Published IEEE research paper.
+- **IEEE Paper:** https://ieeexplore.ieee.org/abstract/document/11400301
+
+### WRAITH Messenger
+End-to-end encrypted private messaging platform. Flask + SocketIO real-time backend with PyQt desktop UI and advanced encryption protocols.
+- **GitHub:** https://github.com/Prabhdeep1701/WRAITH
+
+### Bug Bounty Tool
+Automated vulnerability scanner with Nmap integration, web scraping, automation, and web application security testing.
+
+## Contact
+
+- **Email:** prabhdeep1701@gmail.com
+- **Phone:** +91 94118 64565
+- **GitHub:** https://github.com/Prabhdeep1701
+- **LinkedIn:** https://linkedin.com/in/prabhdeep-singh
+- **Portfolio:** https://portfolio-pi-ten-1w59qqcw3z.vercel.app
+
+## Links
+
+- [Portfolio Website](https://portfolio-pi-ten-1w59qqcw3z.vercel.app): Linux-themed interactive portfolio
+- [GitHub Profile](https://github.com/Prabhdeep1701): Open-source projects and contributions
+- [LinkedIn](https://linkedin.com/in/prabhdeep-singh): Professional profile
+- [RetroWraith Research Paper](https://ieeexplore.ieee.org/abstract/document/11400301): Published IEEE paper on Linux recovery environment
+- [WRAITH Messenger](https://github.com/Prabhdeep1701/WRAITH): E2E encrypted messaging platform

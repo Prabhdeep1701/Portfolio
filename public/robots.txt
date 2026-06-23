@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+
+Sitemap: https://portfolio-pi-ten-1w59qqcw3z.vercel.app/sitemap.xml
+
+# Crawl-delay: 10
