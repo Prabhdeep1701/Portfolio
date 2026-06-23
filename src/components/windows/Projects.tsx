@@ -2,9 +2,16 @@
 
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { Github, ExternalLink, ChevronRight } from "lucide-react";
+import { Github, ExternalLink, FileText, ChevronRight } from "lucide-react";
 
-const projects = [
+type ProjectLink = { type: "github" | "live" | "paper"; href: string };
+
+const projects: {
+  name: string;
+  subtitle: string;
+  description: string;
+  links: ProjectLink[];
+}[] = [
   {
     name: "RetroWraith",
     subtitle: "Minimal Linux Recovery Environment",
@@ -12,7 +19,9 @@ const projects = [
 • terminal-only workflow using ncurses
 • offline disk inspection
 • RetroCloud integration`,
-    github: "https://github.com/Prabhdeep1701/RetroWraith",
+    links: [
+      { type: "paper", href: "https://ieeexplore.ieee.org/abstract/document/11400301" },
+    ],
   },
   {
     name: "WRAITH",
@@ -21,7 +30,9 @@ const projects = [
 • Flask + SocketIO real-time backend
 • PyQt desktop UI
 • Advanced encryption protocols`,
-    github: "https://github.com/Prabhdeep1701/WRAITH",
+    links: [
+      { type: "github", href: "https://github.com/Prabhdeep1701/WRAITH" },
+    ],
   },
   {
     name: "Bug Bounty Tool",
@@ -30,9 +41,17 @@ const projects = [
 • automated vulnerability detection
 • Nmap, scraping, automation
 • web application security testing`,
-    github: "https://github.com/Prabhdeep1701",
+    links: [
+      { type: "github", href: "https://github.com/Prabhdeep1701" },
+    ],
   },
 ];
+
+const linkMeta: Record<ProjectLink["type"], { icon: typeof Github; label: string }> = {
+  github: { icon: Github, label: "GitHub" },
+  live: { icon: ExternalLink, label: "Live" },
+  paper: { icon: FileText, label: "Research Paper" },
+};
 
 export default function Projects() {
   const [expandedProject, setExpandedProject] = useState<string | null>(null);
@@ -84,25 +103,23 @@ export default function Projects() {
               animate={{ opacity: 1, height: "auto" }}
             >
               <div className="whitespace-pre-wrap leading-relaxed">{project.description}</div>
-              <div className="flex gap-3">
-                <a
-                  href={project.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 text-foreground-dim/50 hover:text-foreground transition-colors"
-                >
-                  <Github size={12} strokeWidth={1.5} />
-                  <span>GitHub</span>
-                </a>
-                <a
-                  href={project.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 text-foreground-dim/50 hover:text-foreground transition-colors"
-                >
-                  <ExternalLink size={12} strokeWidth={1.5} />
-                  <span>Live</span>
-                </a>
+              <div className="flex flex-wrap gap-3">
+                {project.links.map((link) => {
+                  const { icon: Icon, label } = linkMeta[link.type];
+                  return (
+                    <a
+                      key={link.type}
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      className="flex items-center gap-1.5 text-foreground-dim/50 hover:text-foreground transition-colors"
+                    >
+                      <Icon size={12} strokeWidth={1.5} />
+                      <span>{label}</span>
+                    </a>
+                  );
+                })}
               </div>
             </motion.div>
           )}

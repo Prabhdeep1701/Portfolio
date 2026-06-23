@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { User, Code2, BarChart3, AtSign, type LucideIcon } from "lucide-react";
 
 interface Window {
   id: string;
@@ -16,50 +17,53 @@ interface TaskbarProps {
   activeApp: string | null;
 }
 
+const dockIcons: Record<string, LucideIcon> = {
+  about: User,
+  projects: Code2,
+  skills: BarChart3,
+  contact: AtSign,
+};
+
 export default function Taskbar({ windows, onToggleWindow, activeApp }: TaskbarProps) {
   return (
     <motion.div
-      className="h-16 sm:h-20 flex justify-center items-end sm:items-center pb-2 sm:pb-3"
+      className="h-16 sm:h-20 flex justify-center items-center pb-2 sm:pb-3"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.5 }}
+      transition={{ delay: 0.7 }}
     >
-      <motion.div className="bg-[#080808]/95 backdrop-blur-xl border border-white/[0.04] px-2 sm:px-3 py-2 rounded-2xl flex gap-1 sm:gap-1.5 items-center mx-2 shadow-2xl">
-        {windows.map((window) => (
-          <motion.button
-            key={window.id}
-            onClick={() => onToggleWindow(window.id)}
-            className={`relative flex flex-col items-center gap-1 px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-xl transition-all ${
-              window.isOpen
-                ? "bg-white/[0.07]"
-                : "hover:bg-white/[0.03]"
-            }`}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.97 }}
-          >
-            <span className={`text-base sm:text-lg font-mono ${
-              window.isOpen ? "text-foreground" : "text-foreground-dim/50"
-            }`}>
-              {window.icon}
-            </span>
-            <span className={`text-[9px] sm:text-[10px] font-mono tracking-wider ${
-              window.isOpen ? "text-foreground-dim" : "text-foreground-dim/30"
-            }`}>
-              {window.title}
-            </span>
-            {window.isOpen && (
-              <motion.div
-                className={`absolute -bottom-0.5 w-1 h-1 rounded-full ${
-                  activeApp === window.id ? "bg-white" : "bg-white/20"
-                }`}
-                layoutId="activeDot"
-                animate={{ opacity: [0.4, 1, 0.4] }}
-                transition={{ duration: 2, repeat: Infinity }}
-              />
-            )}
-          </motion.button>
-        ))}
-      </motion.div>
+      <div className="bg-[#0a0a0a]/90 backdrop-blur-xl border border-white/[0.06] px-2.5 py-2 rounded-2xl flex gap-1.5 items-center shadow-2xl">
+        {windows.map((window) => {
+          const Icon = dockIcons[window.id] ?? User;
+          const active = window.isOpen;
+          return (
+            <motion.button
+              key={window.id}
+              onClick={() => onToggleWindow(window.id)}
+              title={window.title}
+              className={`relative flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 rounded-xl transition-colors ${
+                active
+                  ? "bg-white text-black shadow-lg shadow-white/10"
+                  : "text-white/45 hover:text-white/80 hover:bg-white/[0.05]"
+              }`}
+              whileHover={{ scale: 1.08, y: -2 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Icon size={18} strokeWidth={1.8} />
+              {active && (
+                <motion.div
+                  layoutId="activeDot"
+                  className={`absolute -bottom-1 w-1 h-1 rounded-full ${
+                    activeApp === window.id ? "bg-accent" : "bg-white/30"
+                  }`}
+                  animate={{ opacity: [0.4, 1, 0.4] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                />
+              )}
+            </motion.button>
+          );
+        })}
+      </div>
     </motion.div>
   );
 }

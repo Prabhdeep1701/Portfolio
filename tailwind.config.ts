@@ -17,6 +17,8 @@ const config: Config = {
         "muted-light": "#333333",
         "foreground": "#ffffff",
         "foreground-dim": "#999999",
+        "accent": "#8b7bff",
+        "accent-dim": "#6b5fd6",
       },
       fontFamily: {
         mono: ["JetBrains Mono", "monospace"],

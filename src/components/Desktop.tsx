@@ -9,7 +9,8 @@ import About from "./windows/About";
 import Projects from "./windows/Projects";
 import Skills from "./windows/Skills";
 import Contact from "./windows/Contact";
-import { Clock, Wifi, Battery } from "lucide-react";
+import Landing from "./Landing";
+import { Search, Power, Settings, Maximize2 } from "lucide-react";
 
 interface Window {
   id: string;
@@ -87,100 +88,6 @@ function AnimatedBg() {
   );
 }
 
-function SplashScreen() {
-  const [glitch, setGlitch] = useState(false);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setGlitch(true);
-      setTimeout(() => setGlitch(false), 120);
-    }, 3500);
-    return () => clearInterval(interval);
-  }, []);
-
-  return (
-    <div className="text-center space-y-10">
-      <motion.div
-        className="flex justify-center mb-2"
-        initial={{ scale: 0, rotate: -180 }}
-        animate={{ scale: 1, rotate: 0 }}
-        transition={{ type: "spring", damping: 12, stiffness: 120, delay: 0.2 }}
-      >
-        <div className="cube-scene">
-          <div className={`cube ${glitch ? "glitch" : ""}`}>
-            <div className="cube-face front">~</div>
-            <div className="cube-face back">#</div>
-            <div className="cube-face right">%</div>
-            <div className="cube-face left">@</div>
-            <div className="cube-face top">$</div>
-            <div className="cube-face bottom">&</div>
-          </div>
-        </div>
-      </motion.div>
-
-      <div className="space-y-3">
-        <motion.div
-          className="text-3xl sm:text-4xl font-light tracking-[0.35em] text-white"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.8 }}
-        >
-          PORTFOLIO OS
-        </motion.div>
-
-        <motion.p
-          className="text-white/40 text-xs sm:text-sm font-mono tracking-widest"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1, duration: 0.6 }}
-        >
-          select an application from the dock or sidebar
-        </motion.p>
-      </div>
-
-      <motion.div
-        className="flex justify-center gap-3"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.4 }}
-      >
-        {desktopApps.map((app, i) => (
-          <motion.div
-            key={app.id}
-            className="flex flex-col items-center gap-2"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.6 + i * 0.15, type: "spring" }}
-          >
-            <div className="w-12 h-12 rounded-2xl border border-white/[0.06] flex items-center justify-center text-lg font-mono text-white/60">
-              {app.icon}
-            </div>
-            <span className="text-[9px] font-mono text-white/30 tracking-wider uppercase">
-              {app.label}
-            </span>
-          </motion.div>
-        ))}
-      </motion.div>
-
-      <motion.div
-        className="flex justify-center gap-2"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 2.2 }}
-      >
-        {[0, 1, 2, 3].map((i) => (
-          <motion.div
-            key={i}
-            className="w-1.5 h-1.5 rounded-full bg-white/20"
-            animate={{ scale: [1, 1.5, 1], opacity: [0.3, 0.8, 0.3] }}
-            transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.2 }}
-          />
-        ))}
-      </motion.div>
-    </div>
-  );
-}
-
 export default function Desktop() {
   const [windows, setWindows] = useState<Window[]>([
     { id: "about", title: "whoami", icon: "~", isOpen: false, isMinimized: false, component: <About /> },
@@ -208,7 +115,14 @@ export default function Desktop() {
   useEffect(() => {
     const updateTime = () => {
       const now = new Date();
-      setTime(now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }));
+      setTime(
+        now.toLocaleTimeString([], {
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+          hour12: false,
+        })
+      );
     };
     updateTime();
     const interval = setInterval(updateTime, 1000);
@@ -253,6 +167,9 @@ export default function Desktop() {
 
   return (
     <div className="w-full h-screen bg-dark-bg overflow-hidden flex flex-col relative">
+      {/* Top accent line */}
+      <div className="absolute top-0 left-0 right-0 h-[2px] z-[60] bg-[linear-gradient(90deg,transparent,#8b7bff_20%,#6b5fd6_50%,#8b7bff_80%,transparent)] opacity-70" />
+
       <AnimatedBg />
       <ParticleBackground />
 
@@ -263,12 +180,11 @@ export default function Desktop() {
         animate={{ opacity: 1 }}
         transition={{ delay: 0.3 }}
       >
-        <div className="flex items-center gap-2 sm:gap-4">
-          <span className="text-foreground-dim text-[10px] sm:text-xs tracking-wide hidden sm:inline">
-            prabhdeep@portfolio
+        <div className="flex items-center gap-2 sm:gap-4 min-w-0">
+          <span className="text-white/70 text-[10px] sm:text-xs tracking-[0.2em] font-medium">
+            SYS.OS_V2.0 <span className="text-accent">//</span> PRABHDEEP
           </span>
-          <span className="text-white/20 text-[10px] sm:text-xs">:~</span>
-          <div className="hidden sm:flex items-center gap-1.5 ml-2">
+          <div className="hidden md:flex items-center gap-1.5 ml-2">
             {openWindows.length > 0 && (
               <div className="flex gap-1">
                 {openWindows.map((w) => (
@@ -288,19 +204,26 @@ export default function Desktop() {
             )}
           </div>
         </div>
-        <div className="flex items-center gap-2 sm:gap-4 text-foreground-dim">
-          <Wifi size={11} className="hidden sm:block" strokeWidth={1.5} />
-          <Battery size={11} className="hidden sm:block" strokeWidth={1.5} />
-          <Clock size={11} strokeWidth={1.5} />
-          <span className="text-[10px] sm:text-xs tracking-wide">{time}</span>
+        <div className="flex items-center gap-3 sm:gap-4 text-foreground-dim">
+          <button className="hidden sm:flex items-center gap-1.5 text-white/35 hover:text-white/70 transition-colors">
+            <Search size={11} strokeWidth={1.5} />
+            <span className="text-[10px] tracking-widest">SEARCH_SYS</span>
+          </button>
+          <Maximize2 size={11} strokeWidth={1.5} className="hidden sm:block text-white/30" />
+          <Settings size={11} strokeWidth={1.5} className="hidden sm:block text-white/30" />
+          <Power size={11} strokeWidth={1.5} className="hidden sm:block text-white/30" />
+          <span className="text-white/20 hidden sm:inline">|</span>
+          <span className="text-[10px] sm:text-xs tracking-wide tabular-nums text-white/60">{time}</span>
         </div>
       </motion.div>
 
       {/* Main content */}
       <div className="flex-1 relative overflow-hidden">
-        {/* Desktop shortcut icons - left sidebar */}
+        {/* Desktop shortcut icons - left sidebar (hidden on landing) */}
         <motion.div
-          className="absolute left-3 sm:left-5 top-4 sm:top-6 z-10 flex flex-col gap-2"
+          className={`absolute left-3 sm:left-5 top-4 sm:top-6 z-10 flex-col gap-2 ${
+            openWindows.length === 0 ? "hidden" : "flex"
+          }`}
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.6 }}
@@ -338,17 +261,8 @@ export default function Desktop() {
           })}
         </motion.div>
 
-        {/* Center content */}
-        {openWindows.length === 0 && (
-          <motion.div
-            className="absolute inset-0 flex items-center justify-center"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.8 }}
-          >
-            <SplashScreen />
-          </motion.div>
-        )}
+        {/* Landing content */}
+        {openWindows.length === 0 && <Landing onOpen={toggleWindow} />}
 
         <AnimatePresence>
           {openWindows.map((window) => (
