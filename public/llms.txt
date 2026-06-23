@@ -58,13 +58,13 @@ Automated vulnerability scanner with Nmap integration, web scraping, automation,
 - **Email:** prabhdeep1701@gmail.com
 - **Phone:** +91 94118 64565
 - **GitHub:** https://github.com/Prabhdeep1701
-- **LinkedIn:** https://linkedin.com/in/prabhdeep-singh
+- **LinkedIn:** https://linkedin.com/in/prabhdeep-singh-313359242-313359242
 - **Portfolio:** https://portfolio-pi-ten-1w59qqcw3z.vercel.app
 
 ## Links
 
 - [Portfolio Website](https://portfolio-pi-ten-1w59qqcw3z.vercel.app): Linux-themed interactive portfolio
 - [GitHub Profile](https://github.com/Prabhdeep1701): Open-source projects and contributions
-- [LinkedIn](https://linkedin.com/in/prabhdeep-singh): Professional profile
+- [LinkedIn](https://linkedin.com/in/prabhdeep-singh-313359242-313359242): Professional profile
 - [RetroWraith Research Paper](https://ieeexplore.ieee.org/abstract/document/11400301): Published IEEE paper on Linux recovery environment
 - [WRAITH Messenger](https://github.com/Prabhdeep1701/WRAITH): E2E encrypted messaging platform

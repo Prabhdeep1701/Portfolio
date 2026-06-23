@@ -51,7 +51,7 @@ export default function Terminal() {
       "email: prabhdeep1701@gmail.com",
       "phone: +91 94118 64565",
       "github: github.com/Prabhdeep1701",
-      "linkedin: linkedin.com/in/prabhdeep-singh",
+      "linkedin: linkedin.com/in/prabhdeep-singh-313359242",
     ],
     ls: ["about      contact  help   ls      projects  skills   whoami"],
     whoami: ["root"],

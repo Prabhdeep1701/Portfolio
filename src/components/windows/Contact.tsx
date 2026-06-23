@@ -12,7 +12,7 @@ export default function Contact() {
     { icon: Mail, label: "email", value: "prabhdeep1701@gmail.com", href: "mailto:prabhdeep1701@gmail.com" },
     { icon: Phone, label: "phone", value: "+91 94118 64565", href: "tel:+919411864565" },
     { icon: Github, label: "github", value: "github.com/Prabhdeep1701", href: "https://github.com/Prabhdeep1701" },
-    { icon: Linkedin, label: "linkedin", value: "linkedin.com/in/prabhdeep-singh", href: "https://linkedin.com/in/prabhdeep-singh" },
+    { icon: Linkedin, label: "linkedin", value: "linkedin.com/in/prabhdeep-singh-313359242", href: "https://linkedin.com/in/prabhdeep-singh-313359242" },
   ];
 
   const handleSendMessage = () => {
