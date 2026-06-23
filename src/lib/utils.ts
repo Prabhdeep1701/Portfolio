@@ -2,6 +2,9 @@
 
 import { useEffect } from "react";
 
+export const cn = (...classes: (string | undefined | null | false)[]) =>
+  classes.filter(Boolean).join(" ");
+
 export const useKeyboardShortcuts = (
   handlers: Record<string, () => void>
 ) => {

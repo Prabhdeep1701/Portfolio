@@ -10,6 +10,7 @@ import Projects from "./windows/Projects";
 import Skills from "./windows/Skills";
 import Contact from "./windows/Contact";
 import Landing from "./Landing";
+import NeuralBackground from "./NeuralBackground";
 import { Search, Power, Settings, Maximize2, Menu, X, User, Code2, BarChart3, AtSign, type LucideIcon } from "lucide-react";
 
 interface Window {
@@ -185,6 +186,10 @@ export default function Desktop() {
       {/* Top accent line */}
       <div className="absolute top-0 left-0 right-0 h-[2px] z-[60] bg-[linear-gradient(90deg,transparent,#8b7bff_20%,#6b5fd6_50%,#8b7bff_80%,transparent)] opacity-70" />
 
+      {/* Neural flow-field background — behind everything, on every screen */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <NeuralBackground color="#8b7bff" particleCount={500} trailOpacity={0.12} speed={0.9} />
+      </div>
       <AnimatedBg />
       <ParticleBackground />
 
