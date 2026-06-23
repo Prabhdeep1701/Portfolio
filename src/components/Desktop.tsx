@@ -10,7 +10,7 @@ import Projects from "./windows/Projects";
 import Skills from "./windows/Skills";
 import Contact from "./windows/Contact";
 import Landing from "./Landing";
-import { Search, Power, Settings, Maximize2 } from "lucide-react";
+import { Search, Power, Settings, Maximize2, Menu, X, User, Code2, BarChart3, AtSign, type LucideIcon } from "lucide-react";
 
 interface Window {
   id: string;
@@ -32,6 +32,20 @@ const desktopApps = [
   { id: "skills", label: "skills", icon: "%" },
   { id: "contact", label: "contact", icon: "@" },
 ];
+
+const appIcons: Record<string, LucideIcon> = {
+  about: User,
+  projects: Code2,
+  skills: BarChart3,
+  contact: AtSign,
+};
+
+const appMeta: Record<string, { name: string; hint: string }> = {
+  about: { name: "whoami", hint: "Who I am & experience" },
+  projects: { name: "projects", hint: "What I've built" },
+  skills: { name: "skills", hint: "Tech & tooling" },
+  contact: { name: "contact", hint: "Get in touch" },
+};
 
 const getInitialPosition = (id: string): WindowPosition => {
   if (typeof window !== "undefined") {
@@ -100,6 +114,7 @@ export default function Desktop() {
   const [windowZIndices, setWindowZIndices] = useState<Record<string, number>>({});
   const [time, setTime] = useState("");
   const [activeApp, setActiveApp] = useState<string | null>(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const positions: Record<string, WindowPosition> = {};
@@ -181,6 +196,13 @@ export default function Desktop() {
         transition={{ delay: 0.3 }}
       >
         <div className="flex items-center gap-2 sm:gap-4 min-w-0">
+          <button
+            onClick={() => setMobileMenuOpen(true)}
+            className="sm:hidden -ml-1 p-1 text-white/60 hover:text-white transition-colors"
+            aria-label="open menu"
+          >
+            <Menu size={16} strokeWidth={1.8} />
+          </button>
           <span className="text-white/70 text-[10px] sm:text-xs tracking-[0.2em] font-medium">
             SYS.OS_V2.0 <span className="text-accent">//</span> PRABHDEEP
           </span>
@@ -289,6 +311,84 @@ export default function Desktop() {
         onToggleWindow={toggleWindow}
         activeApp={activeApp}
       />
+
+      {/* Mobile slide-in menu */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <>
+            <motion.div
+              className="fixed inset-0 z-[65] bg-black/60 backdrop-blur-sm sm:hidden"
+              onClick={() => setMobileMenuOpen(false)}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            />
+            <motion.div
+              className="fixed left-0 top-0 bottom-0 z-[70] w-[78%] max-w-[300px] bg-[#080808] border-r border-white/[0.08] sm:hidden flex flex-col"
+              initial={{ x: "-100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "-100%" }}
+              transition={{ type: "spring", damping: 26, stiffness: 260 }}
+            >
+              <div className="absolute top-0 left-0 right-0 h-[2px] bg-[linear-gradient(90deg,#8b7bff,#6b5fd6,transparent)] opacity-70" />
+              <div className="flex items-center justify-between px-5 pt-5 pb-4 border-b border-white/[0.06]">
+                <div>
+                  <div className="font-sans font-bold text-white/90 tracking-wide">PRABHDEEP SINGH</div>
+                  <div className="font-mono text-[9px] tracking-[0.3em] text-white/35 mt-1 uppercase">
+                    System Menu
+                  </div>
+                </div>
+                <button
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="p-1.5 text-white/40 hover:text-white transition-colors"
+                  aria-label="close menu"
+                >
+                  <X size={18} strokeWidth={1.8} />
+                </button>
+              </div>
+
+              <nav className="flex-1 overflow-y-auto premium-scrollbar p-3 space-y-1.5">
+                {desktopApps.map((app) => {
+                  const Icon = appIcons[app.id] ?? User;
+                  const meta = appMeta[app.id];
+                  const isOpen = windows.find((w) => w.id === app.id)?.isOpen;
+                  return (
+                    <button
+                      key={app.id}
+                      onClick={() => {
+                        toggleWindow(app.id);
+                        setMobileMenuOpen(false);
+                      }}
+                      className={`w-full flex items-center gap-3.5 px-3.5 py-3 rounded-xl border transition-colors text-left ${
+                        isOpen
+                          ? "bg-white/[0.06] border-white/15"
+                          : "bg-white/[0.015] border-white/[0.05] hover:bg-white/[0.04]"
+                      }`}
+                    >
+                      <span
+                        className={`flex items-center justify-center w-9 h-9 rounded-lg border ${
+                          isOpen ? "border-accent/40 text-accent bg-accent/10" : "border-white/[0.08] text-white/55"
+                        }`}
+                      >
+                        <Icon size={17} strokeWidth={1.8} />
+                      </span>
+                      <span className="min-w-0">
+                        <span className="block font-mono text-[13px] text-white/85">{meta.name}</span>
+                        <span className="block text-[11px] text-white/35 truncate">{meta.hint}</span>
+                      </span>
+                    </button>
+                  );
+                })}
+              </nav>
+
+              <div className="px-5 py-4 border-t border-white/[0.06] font-mono text-[9px] tracking-widest text-white/25 space-y-1">
+                <div>SECURE_CONNECTION: <span className="text-white/45">ESTABLISHED</span></div>
+                <div>SESSION_ID: <span className="text-white/45">9X-228-ALPHA</span></div>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
