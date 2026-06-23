@@ -166,7 +166,7 @@ export default function Desktop() {
   const openWindows = windows.filter((w) => w.isOpen);
 
   return (
-    <div className="w-full h-screen bg-dark-bg overflow-hidden flex flex-col relative">
+    <div className="w-full h-screen h-[100dvh] bg-dark-bg overflow-hidden flex flex-col relative">
       {/* Top accent line */}
       <div className="absolute top-0 left-0 right-0 h-[2px] z-[60] bg-[linear-gradient(90deg,transparent,#8b7bff_20%,#6b5fd6_50%,#8b7bff_80%,transparent)] opacity-70" />
 

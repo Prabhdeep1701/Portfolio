@@ -32,7 +32,7 @@ export default function Taskbar({ windows, onToggleWindow, activeApp }: TaskbarP
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.7 }}
     >
-      <div className="bg-[#0a0a0a]/90 backdrop-blur-xl border border-white/[0.06] px-2.5 py-2 rounded-2xl flex gap-1.5 items-center shadow-2xl">
+      <div className="bg-[#0a0a0a]/90 backdrop-blur-xl border border-white/[0.06] px-2.5 py-2 rounded-2xl flex gap-1 sm:gap-1.5 items-center shadow-2xl">
         {windows.map((window) => {
           const Icon = dockIcons[window.id] ?? User;
           const active = window.isOpen;
@@ -41,7 +41,7 @@ export default function Taskbar({ windows, onToggleWindow, activeApp }: TaskbarP
               key={window.id}
               onClick={() => onToggleWindow(window.id)}
               title={window.title}
-              className={`relative flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 rounded-xl transition-colors ${
+              className={`relative flex flex-col items-center justify-center gap-1 w-[58px] h-12 sm:w-12 sm:h-12 rounded-xl transition-colors ${
                 active
                   ? "bg-white text-black shadow-lg shadow-white/10"
                   : "text-white/45 hover:text-white/80 hover:bg-white/[0.05]"
@@ -50,6 +50,9 @@ export default function Taskbar({ windows, onToggleWindow, activeApp }: TaskbarP
               whileTap={{ scale: 0.95 }}
             >
               <Icon size={18} strokeWidth={1.8} />
+              <span className={`sm:hidden text-[8px] font-mono tracking-wider ${active ? "text-black/60" : "text-white/40"}`}>
+                {window.title}
+              </span>
               {active && (
                 <motion.div
                   layoutId="activeDot"
